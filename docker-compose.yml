@@ -8,6 +8,7 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_MAIN_DATABASE: ${DB_MAIN_DATABASE}
+      MYSQL_TEST_DATABASE: ${DB_TEST_DATABASE}
 #      TZ: Asia/Tokyo
     volumes:
       - ./db/data:/var/lib/mysql
