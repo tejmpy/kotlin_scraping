@@ -4,5 +4,8 @@
 # Ignore Gradle build output directory
 build
 
+# Ignore MySQL data files
+/db/data/*
+
 # Ignore IntelliJ IDEA-specific files
 /.idea

@@ -1,0 +1,31 @@
+version: '3'
+services:
+  dbserver:
+    image: mysql:5.7.35
+    container_name: coding_test_db
+    environment:
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_MAIN_DATABASE: ${DB_MAIN_DATABASE}
+#      TZ: Asia/Tokyo
+    volumes:
+      - ./db/data:/var/lib/mysql
+      - ./db/init:/docker-entrypoint-initdb.d
+      - ./db/conf:/etc/mysql/conf.d
+    ports:
+      - ${DB_PORT}:3306
+  web:
+    image: coding-test-web:latest
+    container_name: coding_test_web
+    depends_on:
+      - "dbserver"
+    build:
+      context: .
+      dockerfile: ./web/Dockerfile
+    ports:
+      - ${WEB_PORT}:8080
+    tty: true
+    environment:
+      # waitするホストを指定
+      WAIT_HOSTS: dbserver:3396

@@ -1,0 +1,70 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version "$kotlinVersion"
+    id "org.jetbrains.kotlin.plugin.spring" version "$kotlinVersion"
+    id 'org.springframework.boot' version "$springBootVersion"
+//    id 'org.flywaydb.flyway' version "$flywayVersion"
+    id 'co.uzzu.dotenv.gradle' version '1.1.0'
+    id 'org.jlleitschuh.gradle.ktlint' version '10.1.0'
+    id 'idea'
+}
+
+configurations {
+    flywayMigration
+}
+
+dependencies {
+    flywayMigration "mysql:mysql-connector-java:$mysqlConnectorVersion"
+}
+
+//flyway {
+//    url = "jdbc:mysql://${env.DB_HOST.value}:${env.DB_PORT.value}/${env.DB_MAIN_DATABASE.value}?useUnicode=true&characterEncoding=utf8&useSSL=false"
+//    user = env.DB_USER.value
+//    password = env.DB_PASSWORD.value
+//    locations = ['filesystem:db/migration']
+//    configurations = ['compileClasspath', 'flywayMigration']
+//}
+//
+allprojects {
+//    apply plugin: 'org.flywaydb.flyway'
+    apply plugin: "org.jlleitschuh.gradle.ktlint"
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        // Kotlin
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+        implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+
+        // Spring Boot
+        implementation "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+        implementation "org.springframework.boot:spring-boot-starter-validation:$springBootVersion"
+        implementation "org.springframework.boot:spring-boot-starter-jdbc:$springBootVersion"
+        testImplementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+
+        // Jackson
+        implementation "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion"
+
+        // Flyway
+//        implementation "org.flywaydb:flyway-core:$flywayVersion"
+
+        // Dotenv
+        implementation "me.paulschwarz:spring-dotenv:$dotenvVersion"
+
+        // Exposed
+        implementation "org.jetbrains.exposed:exposed-core:$exposedVersion"
+        implementation "org.jetbrains.exposed:exposed-dao:$exposedVersion"
+        implementation "org.jetbrains.exposed:exposed-jdbc:$exposedVersion"
+
+        // DataSource
+        runtimeOnly "mysql:mysql-connector-java:$mysqlConnectorVersion"
+
+        // Kotest
+        testImplementation "io.kotest:kotest-runner-junit5-jvm:$kotestVersion"
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
