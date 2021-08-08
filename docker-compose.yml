@@ -19,6 +19,7 @@ services:
   web:
     image: coding-test-web:latest
     container_name: coding_test_web
+    restart: always
     depends_on:
       - "dbserver"
     build:
