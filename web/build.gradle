@@ -68,6 +68,8 @@ allprojects {
 
         // Exposed
         implementation "org.jetbrains.exposed:exposed-spring-boot-starter:$exposedVersion"
+        // Exposed Java Time
+        implementation "org.jetbrains.exposed:exposed-java-time:$exposedVersion"
 
         // DataSource
         runtimeOnly 'com.zaxxer:HikariCP:3.4.3'
