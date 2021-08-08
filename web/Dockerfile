@@ -8,4 +8,4 @@ ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.6.0/wait
 RUN chmod +x /wait
 
 COPY web/build/libs/web-0.0.1-SNAPSHOT.jar /app.jar
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /app.jar"]
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -Dspring.profiles.active=docker -jar /app.jar"]

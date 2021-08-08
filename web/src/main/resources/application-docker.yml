@@ -1,0 +1,3 @@
+spring:
+  datasource:
+    url: jdbc:mysql://dbserver:3306/${env.DB_MAIN_DATABASE}?useUnicode=true&characterEncoding=utf8&useSSL=false

@@ -2,6 +2,11 @@ spring:
   profiles:
     active: development
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
     username: ${env.DB_USER}
     password: ${env.DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 10
+#    initialization-mode: always
