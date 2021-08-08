@@ -1,6 +1,7 @@
 package com.github.rescuesaiyou.codingtesthonma.web.service.user
 
 import com.github.rescuesaiyou.codingtesthonma.web.domain.model.user.User
+import com.github.rescuesaiyou.codingtesthonma.web.domain.model.user.UserId
 import com.github.rescuesaiyou.codingtesthonma.web.domain.model.user.UserRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -13,6 +14,11 @@ class UserService(
     @Transactional(readOnly = true)
     fun getList(): List<User> {
         return userRepository.findAll()
+    }
+
+    @Transactional(readOnly = true)
+    fun getBy(userId: UserId): User {
+        return userRepository.find(userId)
     }
 
     @Transactional(readOnly = false)

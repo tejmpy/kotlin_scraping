@@ -10,7 +10,7 @@ object ApiInfo {
         val users: List<User>
     )
 
-    object UserInfo {
+    object UserDetail {
         data class ResponseBody(
             val id: UserId,
             val name: UserName

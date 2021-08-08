@@ -52,6 +52,28 @@ $ docker-compose up -d --build
 ```
 $ curl http://localhost:8080/api/user/list
 ```
+---
+### ユーザー詳細を取得
+- エンドポイント: /api/user/{user_id}
+- メソッド: GET
+
+##### リクエストパラメータ
+- user_id: string
+  - ユーザーID
+  - 必須
+
+##### レスポンスボディ
+```
+{
+    "id": "484cb6d9-d1fe-47cc-b543-cbb0b20742b9",
+    "name": "test user2"
+}
+```
+
+例:
+```
+$ curl http://localhost:8080/api/user/484cb6d9-d1fe-47cc-b543-cbb0b20742b9
+```
 
 ---
 
