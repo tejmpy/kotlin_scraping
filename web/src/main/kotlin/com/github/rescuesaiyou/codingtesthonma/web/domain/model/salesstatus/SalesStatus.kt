@@ -1,7 +1,8 @@
 package com.github.rescuesaiyou.codingtesthonma.web.domain.model.salesstatus
 
+import com.github.rescuesaiyou.codingtesthonma.web.task.DataAttr
 import java.time.LocalDate
-import java.time.YearMonth
+import java.time.format.DateTimeFormatter
 import javax.validation.Valid
 
 class SalesStatus(
@@ -11,15 +12,18 @@ class SalesStatus(
 ) {
 
     companion object {
-        private val regex = Regex("""(\d{1,2})""")
+        // 基本的にHPには3ヶ月分表示される
+        const val monthLength = 3
 
-        fun dateFrom(yearMonth: YearMonth, str: String): LocalDate? {
-            return regex.find(str)?.let {
-                val date = it.value.toInt()
-                LocalDate.of(
-                    yearMonth.year, yearMonth.month, date
-                )
-            }
+        val dateSelector = DataAttr("ymd")
+        const val TDL_STATUS_SELECTOR = ".tdl"
+        const val TDS_STATUS_SELECTOR = ".tds"
+
+        private val dateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
+
+        fun dateFrom(str: String): LocalDate? {
+            if (str.isEmpty()) return null
+            return LocalDate.parse(str, dateFormatter)
         }
     }
 }

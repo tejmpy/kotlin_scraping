@@ -20,6 +20,7 @@ object ApiPath {
     const val salesStatus = "$base/sales_status"
     object SalesStatus {
         const val getListByUser = "$salesStatus/list/{user_id}"
-    }
 
+        const val getList = "$salesStatus/list"
+    }
 }

@@ -1,4 +1,8 @@
-# coding_test_honma
+# coding_test_honma(チケット販売状況確認)
+
+アプリ起動中、5分毎に[チケット販売状況ページ](https://www.tokyodisneyresort.jp/ticket/sales_status/) をスクレイピングした結果がDBに保存される
+
+ユーザーを作成し、販売状況を確認したい日付を登録した後に販売状況取得APIを叩くことで、その日付のチケット販売状況が取得できる
 
 ## 必要なもの
 
@@ -14,10 +18,8 @@ $ ./gradlew build
 その後、docker-composeでコンテナを起動する
 ```
 $ docker-compose up -d
-```
 
-※初回起動時は`--build`をつけて実行する
-```
+# 初回起動時は`--build`をつけて実行する
 $ docker-compose up -d --build
 ```
 
@@ -131,8 +133,6 @@ $ curl -X POST -H "Content-Type: application/json" -d '{"name":"test user"}' loc
 $ curl -X POST -H "Content-Type: application/json" -d '{"userId":"484cb6d9-d1fe-47cc-b543-cbb0b20742b9", "date": "2021-07-21"}' localhost:8080/api/notification
 ```
 
----
-
 ### チケット販売状況を取得
 - エンドポイント: /api/sales_status/list/{user_id}
 - メソッド: GET
@@ -172,3 +172,42 @@ $ curl -X POST -H "Content-Type: application/json" -d '{"userId":"484cb6d9-d1fe-
 ```
 $ curl http://localhost:8080/api/sales_status/list/484cb6d9-d1fe-47cc-b543-cbb0b20742b9
 ```
+
+---
+
+### チケット販売状況(全ての日)を取得
+- エンドポイント: /api/sales_status/list
+- メソッド: GET
+
+チケットの販売状況を取得するAPI
+
+##### レスポンスボディ
+```
+{
+    "salesStatuses": [
+        {
+            "date": "2021-08-01",
+            "tdlStatus": "UNAVAILABLE",
+            "tdsStatus": "UNAVAILABLE"
+        },
+        {
+            "date": "2021-08-02",
+            "tdlStatus": "UNAVAILABLE",
+            "tdsStatus": "UNAVAILABLE"
+        },
+        ...
+        {
+            "date": "2021-10-31",
+            "tdlStatus": "CLOSED",
+            "tdsStatus": "CLOSED"
+        }
+    ]
+}
+```
+
+例:
+```
+$ curl http://localhost:8080/api/sales_status/list
+```
+
+---

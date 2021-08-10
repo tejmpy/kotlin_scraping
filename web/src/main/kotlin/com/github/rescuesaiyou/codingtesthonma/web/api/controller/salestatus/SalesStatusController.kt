@@ -33,6 +33,21 @@ class SalesStatusController(
         )
     }
 
+    @GetMapping(ApiPath.SalesStatus.getList)
+    fun getList(): ApiInfo.GetList {
+        val salesStatuses = salesStatusService.getList()
+
+        return ApiInfo.GetList(
+            salesStatuses.map {
+                ApiInfo.SalesStatusDetail.ResponseBody(
+                    date = it.date,
+                    tdlStatus = it.tdlStatus,
+                    tdsStatus = it.tdsStatus
+                )
+            }
+        )
+    }
+
     @ModelAttribute
     fun getUserIdFromPathVariable(
         @PathVariable("user_id", required = false) userId: UUID?

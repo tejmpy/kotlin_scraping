@@ -17,6 +17,7 @@ dependencies {
 }
 
 flyway {
+    // TODO: ホスト名、ポート番号を環境変数で定義する
     url = "jdbc:mysql://dbserver:3306/${env.DB_MAIN_DATABASE.value}?useUnicode=true"
     user = env.DB_USER.value
     password = env.DB_PASSWORD.value
