@@ -1,4 +1,4 @@
-# coding_test_honma(チケット販売状況確認)
+# チケット販売状況確認アプリ
 
 アプリ起動中、5分毎に[チケット販売状況ページ](https://www.tokyodisneyresort.jp/ticket/sales_status/) をスクレイピングした結果がDBに保存される
 
